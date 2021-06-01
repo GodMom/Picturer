@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="../../static/img/head.ico" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/mainmenu.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/form.css">
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
+    {% block title %}
+    <title>Picturer</title>
+    {% endblock %}
+</head>
+<body>
+<div class="header">
+    <a class="logo" href="#"><img id="logo" title="Picturer" alt="网站logo" src="../../static/img/logo.png"></a>
+    {% if request.user.is_authenticated %}
+    <ul class="header log" >
+        <li><a class="hli" href="#">推荐</a></li>
+        <li><a class="hli pub" href="javascript:void(0)">发表作品</a></li>
+        <li><a class="hli" href="#" >关注</a></li>
+        <li><a class="hli" href="#">通知</a></li>
+        <li id="search">
+            <form target="_blank" method="get" action="">
+                <input type="text" name="search" placeholder="  搜索" autocomplete="off">
+                <input type="text" style="display: none">
+                <a href="javascript:void(0)" id="search_a"><img src="../../static/img/search.ico" width=18 height=18></a>
+            </form>
+        </li>
+    </ul>
+    <a href="#" class="hp"><img src="../../static/img/cute.jpg" alt="用户头像" title="个人主页"></a>
+    {% else %}
+    <ul class="header unlog">
+        <li><a class="hli" href="#">推荐</a></li>
+        <li><a class="hli pub" href="javascript:void(0);">发表作品</a></li>
+        <li id="search">
+            <form target="_blank" method="get" action="">
+                <input type="text" name="search" placeholder="  搜索" autocomplete="off">
+                <input type="text" style="display: none">
+                <a href="javascript:void(0)" id="search_a"><img src="../../static/img/search.ico" width=18 height=18></a>
+            </form>
+        </li>
+    </ul>
+    <a id="register" href="/picture/register">注册</a>
+    <a id="login" href="javascript:void(0);">登录</a>
+    {% endif %}
+</div>
+{% if not request.user.is_authenticated %}
+    <div id ="loginer">
+        <form id ="loginform" class="form-horizontal" method="post" autocomplete="off" target="id_iframe">
+            {% csrf_token %}
+            <div class="head"><label>登录</label></div>
+            <div class="logininput">
+                {% for i in form %}
+                    {{ i.label_tag }}
+                <input type="password" name="password3" style="display: none;" autocomplete="off">
+                    {{i}}
+                {% endfor %}
+            </div>
+            <div id="error" class="error"></div>
+            <div>
+                <button type="submit" class="btn-primary bn" id="log">提交</button>
+            </div>
+        </form>
+        <i class="closed"></i>
+        <iframe id="id_iframe" name="id_iframe" style="display:none;"></iframe>
+    </div>
+{% endif %}
+{% block content %}{% endblock %}
+{% block sidebar %}{% endblock %}
+<script type="text/javascript">
+    $(function ($) {
+
+        $("#login").on("click",function () {
+            $("body").append("<div class='hiding'></div>");
+            $(".hiding").fadeIn("slow");
+            $("#loginer").fadeIn("slow");
+        });
+
+        $("#log").click(function () {
+            var back1;
+            console.log($("#loginform").serialize());
+            $.ajax({
+                header: {
+                    Accept: "application/json; charset=utf-8",
+                    contentType: "application/x-www-form-urlencoded",
+                },
+                async: false,
+                type: "POST",
+                dataType: "json",
+                url: "/picture/login",
+                data: JSON.stringify($("#loginform").serialize()).replace('\"', '').replace('\"', ''),
+                xhrFileds: {
+                    withCredentials: true
+                },
+                beforeSend: function (XMLHttpRequest) {
+                    var csrf = $("[name = 'csrfmiddlewaretoken']").attr("value");
+                    XMLHttpRequest.setRequestHeader("X-csrftoken", csrf);
+                },
+                success: function (results) {
+                    back1 = jQuery.parseJSON(results);
+            },});
+            if(back1.redirect !== ""){
+                $(location).attr("href", "/picture"+back1.redirect);
+            }
+            else if (back1.error != null){
+                $("div#error").text(back1.error);
+                $("input[name=password]").val("");
+            }
+        });
+
+        $("i.closed").click(function () {
+            $(".hiding").remove();
+            $("#loginer").fadeOut(100);
+        });
+
+        $("a.pub").click(function () {
+            $.get("/picture/online",function (data) {
+                if(data == "yes"){
+                    window.open("/picture/publish");
+                }
+                else {
+                    alert("登陆后才可发布作品喔");
+                    $("body").append("<div class='hiding'></div>");
+                    $(".hiding").fadeIn("slow");
+                    $("#loginer").fadeIn("slow");
+                }
+            });
+        });
+
+        $("input[name=search]").keypress(function (event) {
+            if (event.keyCode==13) {
+                if ($("input[name=search]").val()==""){
+
+                }
+                else{
+                    let url = "/picture/search?name=";
+                    window.open(url+$("input[name=search]").val());
+                }
+            }
+        });
+
+        $("#search_a").click(function () {
+            if ($("input[name=search]").val()==""){
+
+            }
+            else{
+                let url = "/picture/search?name=";
+                window.open(url+$("input[name=search]").val());
+            }
+        })
+    });
+</script>
+</body>
+</html>

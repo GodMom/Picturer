@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个税计算器</title>
+    <link href="../../static/img/head.ico" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../../static/js/common.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../static/css/style1.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/css/vicons-font.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/css/buttons.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/css/form1.css">
+</head>
+<body class="register">
+    <div class="all">
+        <div class="investment_title">
+            <div class="on">工资</div>
+            <div class="">年终奖</div>
+        </div>
+        <div class="investment_con">
+            <div class="investment_con_list">
+                <div class="register">
+                    <form class="main" action="javascript:void(0)">
+                        <label for="month">月份</label>
+                        <select id="month" >
+                            <option value="1">1月</option>
+                            <option value="2">2月</option>
+                            <option value="3">3月</option>
+                            <option value="4">4月</option>
+                            <option value="5">5月</option>
+                            <option value="6">6月</option>
+                            <option value="7">7月</option>
+                            <option value="8">8月</option>
+                            <option value="9">9月</option>
+                            <option value="10">10月</option>
+                            <option value="11">11月</option>
+                            <option value="12">12月</option>
+                        </select>
+                        <label for="start-sal">税前工资</label>
+                        <input type="text" id="start-sal" class="sal-input" placeholder="单位: 元">
+                        <label for="one-gold">五险一金</label>
+                        <input type="text" id="one-gold" class="sal-input" placeholder="单位: 元">
+                        <label for="special">专项附加扣除</label>
+                        <input type="text" id="special" class="sal-input" placeholder="单位: 元">
+                        <label for="start-get" >减除费用（起征点）</label>
+                        <input type="text" id="start-get" class="sal-input" placeholder="单位: 元" value="5000" readonly= "readonly">
+                        <label for="all-sal">累计收入</label>
+                        <input type="text" id="all-sal" class="sal-input" placeholder="单位: 元">
+                        <label for="all-wu">累计五险一金</label>
+                        <input type="text" id="all-wu" class="sal-input" placeholder="单位: 元">
+                        <label for="all-add">累计专项附加扣除</label>
+                        <input type="text" id="all-add" class="sal-input" placeholder="单位: 元">
+                        <label for="all-reduce">累计减除费用（起征点）</label>
+                        <input type="text" id="all-reduce" class="sal-input" placeholder="单位: 元" value="5000" readonly= "readonly">
+                    </form>
+                </div>
+                <div class="start">
+                    <button id="figure" class="button button--nuka button--round-s button--text-thick">计算</button>
+                    <button id="reset" class="button button--nuka button--round-s button--text-thick">重置</button>
+                </div>
+                <div class="result">
+                    <form class="main" action="javascript:void(0)">
+                        <label for="should-pay">应纳税所得额</label>
+                        <input type="text" id="should-pay" class="sal-input" placeholder="单位: 元">
+                        <label for="tax-rate">税率</label>
+                        <input type="text" id="tax-rate" class="sal-input" placeholder="%">
+                        <label for="fast-reduce">速算扣除数</label>
+                        <input type="text" id="fast-reduce" class="sal-input" placeholder="单位: 元">
+                        <label for="all-pay">累计应纳税额</label>
+                        <input type="text" id="all-pay" class="sal-input" placeholder="单位: 元">
+                        <label for="had-pay">累计已缴税额</label>
+                        <input type="text" id="had-pay" class="sal-input" placeholder="单位: 元">
+                        <label for="mon-pay">当月个税（应补税额）</label>
+                        <input type="text" id="mon-pay" class="sal-input" placeholder="单位: 元">
+                        <label for="final-sal">税后工资</label>
+                        <input type="text" id="final-sal" class="sal-input" placeholder="单位: 元">
+                    </form>
+                </div>
+            </div>
+            <div class="investment_con_list">
+                <div class="register_bonus">
+                    <form class="main_bonus" action="javascript:void(0)">
+                        <h3 style="color: #c2563b;border-bottom: #030509 1px solid;text-align: center">这里输入奖金</h3>
+                        <input type="text" style="display: none">
+                        <label for="bonus">年终奖</label>
+                        <input type="text" id="bonus" autocomplete="off" placeholder="单位: 元">
+                        <div style="height: 70px">
+                            <button id="figure_bonus" class="bonus button button--nuka button--round-s button--text-thick">点我点我</button>
+                            <button id="reset_bonus" class="bonus button button--nuka button--round-s button--text-thick">再点我试试</button>
+                        </div>
+                        <label for="should-get">应纳税所得额</label>
+                        <input type="text" id="should-get" placeholder="单位: 元" autocomplete="off">
+                        <label for="blind">进入盲区</label>
+                        <input type="text" id="blind" autocomplete="off" placeholder="单位: 元">
+                        <label for="per-month">平均每月</label>
+                        <input type="text" id="per-month" autocomplete="off" placeholder="单位: 元">
+                        <label for="tax">税率</label>
+                        <input type="text" id="tax" autocomplete="off" placeholder="%">
+                        <label for="fast">速算扣除数</label>
+                        <input type="text" id="fast" autocomplete="off" placeholder="单位: 元">
+                        <label for="reduce">应纳税额</label>
+                        <input type="text" id="reduce" autocomplete="off" placeholder="单位: 元">
+                        <label for="final-money">税后年终奖</label>
+                        <input type="text" id="final-money" autocomplete="off" placeholder="单位: 元">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function ($) {
+            $("#month").change(function () {
+                $("#all-reduce").val(parseInt($(this).children('option:selected').val())*5000);
+                if($("#start-sal").val().length!=0){
+                    $("#all-sal").val(parseInt($(this).children('option:selected').val())*parseInt($("#start-sal").val()));
+                }
+                if($("#one-gold").val().length!=0){
+                    $("#all-wu").val(parseInt($(this).children('option:selected').val())*parseInt($("#one-gold").val()));
+                }
+                if($("#special").val().length!=0){
+                    $("#all-add").val(parseInt($(this).children('option:selected').val())*parseInt($("#special").val()));
+                }
+            });
+            $("#start-sal").bind("input propertychange",function(event){
+                $("#all-sal").val(parseInt($(this).val())*parseInt($("#month").children('option:selected').val()));
+            });
+            $("#one-gold").bind("input propertychange",function(event){
+                $("#all-wu").val(parseInt($(this).val())*parseInt($("#month").children('option:selected').val()));
+            });
+            $("#special").bind("input propertychange",function(event){
+                $("#all-add").val(parseInt($(this).val())*parseInt($("#month").children('option:selected').val()));
+            });
+            $("#start-get").bind("input propertychange",function(event){
+                $("#all-reduce").val(parseInt($(this).val())*parseInt($("#month").children('option:selected').val()));
+            });
+            //应纳税所得额= 累计税前工资收入 - 累计五险一金（个人缴纳部分） - 累计专项附加扣除 - 累计减除费用
+            $("#figure").click(function () {
+                sal = parseInt($("#start-sal").val());
+                if($("#start-sal").val().length==0){
+                    alert("请先输入每月工资哦!");
+                    return;
+                }
+                else if(isNaN(sal)){
+                    alert("请输入合法的工资数值!工资必须由数字组成");
+                    clear();
+                    return;
+                }
+                else if(sal<0){
+                    alert("工资数值不能为负!");
+                    clear();
+                    return;
+                }
+                if ($("#one-gold").val().length==0){
+                    $("#one-gold").val(0);
+                    $("#all-wu").val(0);
+                }
+                if($("#special").val().length==0){
+                    $("#special").val(0);
+                    $("#all-add").val(0);
+                }
+                var a = parseInt($("#all-sal").val())-parseInt($("#all-wu").val())-parseInt($("#all-add").val())-parseInt($("#all-reduce").val());
+                if(a<0){
+                    $("#should-pay").val(0);
+                }
+                else {
+                    $("#should-pay").val(a.toFixed(2));
+                }
+                $("#tax-rate").val(think(a)+"%");
+                $("#fast-reduce").val(think_fast(a).toFixed(2));
+                var k = (parseInt($("#should-pay").val())*parseInt($("#tax-rate").val().replace("%",""))/100)-$("#fast-reduce").val();
+                $("#all-pay").val(k.toFixed(2));
+                //累计已缴纳税额 = 上月应纳税所得额 x 预扣税率-速算扣除数
+                var month = parseInt($("#month").children('option:selected').val());
+                if(month==1){
+                    $("#had-pay").val(0);
+                }
+                else {
+                    $("#had-pay").val((parseInt($("#should-pay").val())/month*(month-1)*parseInt($("#tax-rate").val())/100)-parseInt($("#fast-reduce").val()).toFixed(2));
+                }
+                $("#mon-pay").val(parseInt($("#all-pay").val())-parseInt($("#had-pay").val()).toFixed(2));
+                if(parseInt($("#should-pay").val())==0){
+                    $("#final-sal").val(parseInt($("#start-sal").val())-parseInt($("#special").val())-parseInt($("#one-gold").val()))
+                }
+                else {
+                    $("#final-sal").val(parseInt($("#start-sal").val())-parseInt($("#mon-pay").val()).toFixed(2));
+                }
+
+            });
+
+            $("#reset").click(function () {
+                clear();
+            });
+
+            $("#figure_bonus").click(function () {
+               var sal = parseInt($("#bonus").val());
+               if(isNaN(sal)){
+                   alert("请输入合法的工资数值!工资必须由数字组成");
+                   $("#bonus").val("");
+                   return;
+               }
+               else if(sal<0){
+                   alert("工资数值不能为负!");
+                   $("#bonus").val("");
+                   return;
+               }
+               $("#should-get").val(sal);
+               if(blind(sal)){
+                   $("#blind").val("是");
+               }
+               else {
+                   $("#blind").val("否");
+               }
+               $("#per-month").val((sal/12).toFixed(2));
+               $("#tax").val(think1(sal/12)+"%");
+               $("#fast").val(think2(sal/12));
+               $("#reduce").val(parseInt($("#should-get").val())*parseInt($("#tax").val())/100-parseInt($("#fast").val()));
+               $("#final-money").val((sal-parseFloat($("#reduce").val())).toFixed(2));
+            });
+
+            $("#reset_bonus").click(function () {
+                clear();
+            });
+
+            function clear() {
+                $("#month option:first").prop("selected","selected");
+                $("input").each(function () {
+                    $(this).val("");
+                });
+                $("#start-get").val(5000);
+                $("#all-reduce").val(5000);
+            }
+
+            function blind(sal) {
+                if(sal>=18001&&sal<=19283.33){
+                    return true;
+
+                }
+                else if(sal>=54001&&sal<=60187.50){
+                    return true;
+                }
+                else if(sal>=108001&&sal<=114600){
+                    return true;
+                }
+                else if(sal>=420001&&sal<=447500){
+                    return true;
+                }
+                else if(sal>=660001&&sal<=706538.46){
+                    return true;
+                }
+                else if(sal>=960001&&sal<=1120000){
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+
+            function think(sal) {
+                if(sal<=36000){
+                    return 3;
+                }
+                else if(sal<=140000) {
+                    return 10;
+                }
+                else if(sal<=300000){
+                    return 20;
+                }
+                else if(sal<=420000){
+                    return 25;
+                }
+                else if(sal<=660000){
+                    return 30;
+                }
+                else if(sal<=960000){
+                    return 35;
+                }
+                else {
+                    return 45;
+                }
+            }
+            function think1(sal) {
+                if(sal<=3000){
+                    return 3;
+                }
+                else if(sal<=12000) {
+                    return 10;
+                }
+                else if(sal<=25000){
+                    return 20;
+                }
+                else if(sal<=35000){
+                    return 25;
+                }
+                else if(sal<=55000){
+                    return 30;
+                }
+                else if(sal<=80000){
+                    return 35;
+                }
+                else {
+                    return 45;
+                }
+            }
+            function think2(sal) {
+                if(sal<=3000){
+                    return 0;
+                }
+                else if(sal<=12000) {
+                    return 210;
+                }
+                else if(sal<=25000){
+                    return 1410;
+                }
+                else if(sal<=35000){
+                    return 2660;
+                }
+                else if(sal<=55000){
+                    return 4410;
+                }
+                else if(sal<=80000){
+                    return 7160;
+                }
+                else {
+                    return 15160;
+                }
+            }
+            function think_fast(sal) {
+                if(sal<=36000){
+                    return 0;
+                }
+                else if(sal<=140000) {
+                    return 2520;
+                }
+                else if(sal<=300000){
+                    return 16920;
+                }
+                else if(sal<=420000){
+                    return 31920;
+                }
+                else if(sal<=660000){
+                    return 52920;
+                }
+                else if(sal<=960000){
+                    return 85920;
+                }
+                else {
+                    return 181920;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>展示</title>
+<link rel="stylesheet" href="../../static/css/viewer.min.css">
+<link rel="stylesheet" href="../../static/css/show.css">
+<style>
+    * { margin: 0; padding: 0;}
+    #jq22 { width: 700px; margin: 0 auto; font-size: 0;}
+    #jq22 li { display: inline-block; width: 32%; margin-left: 1%; padding-top: 1%;}
+    #jq22 li img { width: 224Px; height: 224px;}
+</style>
+{% endblock %}
+{% block content %}
+<div class="show-content">
+    <span><img src="/media/{{work.author_id.head}}" alt="not found">{{work.author_id.username}}</span>
+    <div class="work-content">
+        <h1>{{work.title}}</h1>
+        <p>{{work.description}}</p>
+    </div>
+    <ul id="jq22">
+        {% for i in img %}
+        <li><img data-original="/media/{{i.img}}" src="/media/{{i.img}}" style="cursor: pointer"></li>
+        {% endfor %}
+    </ul>
+</div>
+<script src="../../static/js/viewer.min.js"></script>
+<script>
+    var viewer = new Viewer(document.getElementById('jq22'), {
+        url: 'data-original'
+    });
+</script>
+{% endblock %}

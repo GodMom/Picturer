@@ -1,0 +1,264 @@
+
+label{
+    color: #dc5255;
+    font-weight: bold;
+}
+
+body.register{
+    background-image: url("../img/shawu.jpg");
+    background: #f7fbfc;
+    background: -moz-linear-gradient(top, #f7fbfc 0%, #add9e4 100%);
+    background: -webkit-linear-gradient(right, #f7fbfc 0%,#add9e4 100%);
+    background: -ms-linear-gradient(top, #f7fbfc 0%,#add9e4 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7fbfc', endColorstr='#add9e4',GradientType=0 );
+}
+
+div.register{
+    display: inline-block;
+    float: left;
+    position: relative;
+    margin: 10px 20px 80px 200px;
+    width:450px;
+    height: 600px;
+}
+
+div.result{
+    display: inline-block;
+    float: right;
+    position: relative;
+    margin: 40px 0;
+    width:450px;
+    right: 200px;
+    height: 500px;
+}
+
+div.register_bonus{
+    display: inline-block;
+    float: left;
+    position: relative;
+    margin: 10px 20px 80px 550px;
+    width:450px;
+    height: 600px;
+}
+
+.main{
+    border: 0.3px black inset;
+    margin: 20px 30px;
+    border-radius: 15px;
+    padding: 10px 20px;
+    background-color: white;
+}
+
+.main_bonus{
+    border: 0.3px black inset;
+    margin: 10px auto;
+    border-radius: 15px;
+    padding: 10px 20px;
+    background-color: white;
+}
+
+div.start{
+    display: inline-block;
+    background-color: white;
+    position: relative;
+    float: left;
+    margin: 250px 0px 250px 10px;
+    width: 180px;
+}
+
+button{
+    display: block;
+    margin: 20px;
+    width: 100px!important;
+    height: 50px!important;
+}
+
+
+div.errors{
+    margin-left: 20px;
+    height: 30px;
+    width: 200px;
+    font-size: 12px;
+    color: rgba(194, 8, 18, 0.85);
+}
+
+div.head{
+    height: 60px;
+}
+label.head{
+    position: relative;
+    color: red;
+    font-size:24px;
+    width: 50px;
+    margin: 20px 150px 15px;
+}
+
+input{
+    outline: none;
+}
+
+div.main > input{
+    width: 250px;
+    height: 30px;
+}
+
+
+button.bn{
+    outline: none;
+    margin-left:35px;
+    margin-right: 35px;
+    width: 250px;
+    height: 40px;
+    border-radius: 10px;
+    position: relative;
+}
+
+#loginer{
+    display: none;
+    position: absolute;
+    background: url("../img/bg1.png");
+    float: left;
+    width: 30%;
+    height: 40%;
+    z-index: 10000;
+    left: 35%;
+    right: 35%;
+    top: 25%;
+    bottom: 30%;
+    border: 1px solid grey;
+    border-radius: 7px;
+}
+
+div.hiding{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    background:#333;
+    opacity:0.6;
+    filter:alpha(opacity=60);
+    z-index:9999;
+    position:fixed;
+    top:0;
+    left:0;
+    display:none;
+}
+
+div.error{
+    font-weight: bold;
+    position: relative;
+    height: 30px;
+    width: 80%;
+    color: rgba(194, 0, 15, 0.85);
+    font-size: 12px;
+    left: 95px;
+}
+
+i.closed{
+    background: url("../img/close.png") no-repeat 100% center;
+    position: absolute;
+    float: right;
+    top: 22px;
+    right: 35px;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+div.head{
+    top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 40px;
+}
+
+.head label{
+    margin-top: 20px;
+    color: rgba(194,0,15,0.85);
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+div.logininput{
+    width: 270px;
+    position: relative;
+    margin-right: 0;
+    left: 90px;
+    right: 20px;
+}
+
+label[for^="id"]{
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+input[name=username][name=password]{
+    height: 30px;
+    width: 250px;
+}
+
+#log{
+    position: relative;
+    left :13%
+}
+
+#maincontent{
+    left: 100px;
+    right: 60px;
+    margin-top: 30px;
+    margin-left: 100px;
+    margin-right: 60px;
+    border: 0.7px solid #6bdcac;
+    border-radius: 2px;
+    filter:alpha(Opacity=80);
+    -moz-opacity:0.8;
+    opacity: 0.8;
+    background-color: #f9f9f9;
+}
+
+body.publish {
+    background-image: url("../img/shawu.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+}
+
+div.d_title{
+    margin-left: 40px;
+    margin-top: 50px;
+}
+
+.ckbx-circle-4 input[type=checkbox]{
+    position: relative;
+    top: 2px;
+}
+
+.pub_label{
+    cursor: pointer;
+}
+
+h4{
+    font-weight: bold;
+    color: #dc5255
+}
+
+textarea{
+    width: 500px;
+    height: 200px;
+}
+
+#title,textarea{
+    border: solid 0.5px #6bdcac;
+    border-radius: 2px;
+}
+
+button.bonus{
+    font-size: 13px;
+    margin: 10px 10px;
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content">
+    <ul>
+        {% for i in works %}
+        <li class="work-li">
+            <a href="javascript:void(0)" class="img-look" id="a_img{{i.ID}}">
+                <img src="/media/{{i.image_set.all|first}}" id="work_{{i.ID}}" title="{{i.description}}">
+            </a>
+            <a href="javascript:void(0)" class="information" id="a_info{{i.ID}}">
+                <span style="width: 100px" id="works_{{i.ID}}"><b>{{i.title}}</b></span>
+            </a>
+            <span class="information"><i class="username">{{i.author_id.username}}</i><span class="sub_time">{{i.sub_time|date:'Y-m-d'}}</span></span>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endblock %}
+</div>
+{% block sidebar %}
+<div class="sidebar">
+    <div class="tags-list">
+        <h3>标签</h3>
+        <ul class="ul-tags">
+            {% for i in tags %}
+            <li value="{{i}}" class="tags"><a href=javascript:void(0) class="tags">{{i}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<script>
+    $(function ($) {
+        $("a.tags").click(function (){
+            let tag_li = $(this).parent();
+            let url = "/picture/search?tag=";
+            window.open(url+$(tag_li).attr('value'));
+        });
+
+        $(".img-look").click(function () {
+            let work_id = $(this).children(":first").attr("id");
+            console.log(work_id+': '+typeof(work_id));
+            window.open("/picture/show?work="+work_id.split('_')[1]);
+        });
+
+        $(".information").click(function () {
+            let work_id = $(this).children(":first").attr("id");
+            console.log(work_id+': '+typeof(work_id));
+            window.open("/picture/show?work="+work_id.split('_')[1]);
+        })
+    })
+</script>
+{% endblock %}

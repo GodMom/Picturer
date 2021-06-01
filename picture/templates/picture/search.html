@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}
+<title>检索结果</title>
+<link rel="stylesheet" type="text/css" href="../../static/css/search.css">
+{% endblock %}
+{% block content %}
+    <div class="searcher">
+        <p class="show">搜索<span class="show"></span>关键字</p>
+        <div class="h"><h4>作品</h4></div>
+        <p class="result">共检索到<span class="show1">{{works|length}}</span>个结果</p>
+            <ul>
+                {% for i in works %}
+                <li class="work-li">
+                    <a href="javascript:void(0)" class="img-look" id="a_img">
+                        <img src="/media/{{i.image_set.all|first}}" title="{{i.description}}" id="work_{{i.ID}}">
+                    </a>
+                    <a href="javascript:void(0)" class="information" id="a_info">
+                        <span style="width: 100px" id="works_{{i.ID}}"><b>{{i.title}}</b></span>
+                    </a>
+                    <span class="information"><i class="username">{{i.author_id.username}}</i><span class="sub_time">{{i.sub_time|date:'Y-m-d'}}</span></span>
+                </li>
+                {% endfor %}
+            </ul>
+    </div>
+    <script>
+        $(function ($) {
+            let keyword = decodeURI(window.location.search);
+            let span = keyword.split('=')[1];
+            $("span.show").text('"'+span+'"');
+
+            $("#a_info").click(function () {
+                let work_id = $(this).children(":first").attr("id");
+                console.log(work_id+': '+typeof(work_id));
+                window.open("/picture/show?work="+work_id.split('_')[1]);
+            });
+
+            $("#a_img").click(function () {
+                let work_id = $(this).children(":first").attr("id");
+                console.log(work_id+': '+typeof(work_id));
+                window.open("/picture/show?work="+work_id.split('_')[1]);
+            });
+        })
+    </script>
+{% endblock %}

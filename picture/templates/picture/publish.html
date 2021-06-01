@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link href="../../static/img/head.ico" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/demo.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/CSS-Checkbox-Library-master/dist/css/checkboxes.min.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="../../static/js/webuploader-0.1.5/webuploader.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/form.css">
+    <title>发表作品</title>
+</head>
+<body class="publish">
+    <div class="clear"></div>
+    <div id="maincontent">
+        <input type="text" id="works" value="-1" style="display: none;">
+        <form method="post" class="form-horizontal" autocomplete="off">
+            {% csrf_token %}
+            <div class="d_title">
+                <div><label class="pub_label" for="title"><h4>标题</h4></label></div>
+                <input type="text" name="title" id="title">
+            </div>
+            <div class="d_title">
+                <div><label class="pub_label" for="description"><h4>图片描述</h4></label></div>
+                <textarea name="description" id="description"></textarea>
+            </div>
+            <div class="d_title">
+                <div><label><h4>请至少选择一个标签</h4></label></div>
+                <div class="ckbx-circle-4">
+                    {% for i in tags %}
+                    <input type="checkbox" name="tag" value="{{i}}" id="ckbx-circle-4-{{forloop.counter0}}">
+                    <label for="ckbx-circle-4-{{forloop.counter0}}">{{i}}</label>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="d_title">
+                <div class="page-container">
+                    <div><label class="exchange"><h4>点击隐藏</h4></label></div>
+                    <div id="uploader" class="wu-example">
+                        <div class="queueList">
+                            <div id="dndArea" class="placeholder">
+                                <div id="filePicker"></div>
+                                2                            <p>或将照片拖到这里</p>
+                            </div>
+                        </div>
+                        <div class="statusBar" style="display:none">
+                            <div class="progress">
+                                <span class="text">0%</span>
+                                <span class="percentage"></span>
+                            </div>
+                            <div class="info"></div>
+                            <div class="btns">
+                                <div id="filePicker2"></div>
+                                <div class="uploadBtn">开始上传</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="../../static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../static/js/webuploader-0.1.5/webuploader.min.js"></script>
+    <script type="text/javascript">
+        window.webuploader = {
+            config:{
+                thumbWidth: 240, //缩略图宽度，可省略，默认为110
+                thumbHeight: 240, //缩略图高度，可省略，默认为110
+                wrapId: 'uploader', //必填
+            },
+            //处理客户端新文件上传时，需要调用后台处理的地址, 必填
+            uploadUrl: 'publish',
+            //处理客户端原有文件更新时的后台处理地址，必填
+            updateUrl: 'fileupdate.php',
+            //当客户端原有文件删除时的后台处理地址，必填
+            removeUrl: 'filedel.php',
+        };
+        $("label.exchange").click(function () {
+            $("#uploader").fadeToggle(800,function () {
+                if($(".exchange h4").text() == "点击隐藏"){
+                    $("html").height($("#maincontent").height());
+                    $(".exchange h4").text("点击显示");
+                }
+                else {
+                    $(".exchange h4").text("点击隐藏");
+                    $("html").height($("#maincontent").height());
+                }
+            });
+        });
+
+    </script>
+    <script src="../../static/js/webuploader-0.1.5/extend-webuploader.js" type="text/javascript"></script>
+</body>
+</html>

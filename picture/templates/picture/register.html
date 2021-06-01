@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link href="../../static/img/head.ico" rel="shortcut icon" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/form.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <title>注册</title>
+</head>
+<body class="register">
+	<div class="register">
+		<form method="post" action="" enctype="multipart/form-data" class="form-horizontal register" role ="form" autocomplete="off">
+			{% csrf_token %}
+			<div class="head"><label class="head">注册</label></div>
+			{% for i in form %}
+				<div class="main">
+					{{ i.label_tag }}<input type="password" name="password" style="display: none;" autocomplete="off"> {{i}}
+				</div>
+			<div class="errors"><p>{{i.errors}}</p></div>
+			{% endfor %}
+			<div>
+				<button type="submit" class="btn-primary bn">立即注册</button>
+			</div>
+		</form>
+	</div>
+	<script>
+		$ (function ($) {
+			$("input").focus(function () {
+				$("div.errors").text("");
+			})
+		});
+	</script>
+</body>
+</html>

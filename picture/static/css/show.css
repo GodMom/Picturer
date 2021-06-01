@@ -1,0 +1,16 @@
+
+.show-content{
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-top: 20px;
+    border: 0.5px solid darkgray;
+    border-radius: 5px;
+}
+
+.work-content{
+    margin: 10px 100px;
+}
+
+#jq22{
+    margin-bottom: 20px!important;
+}
