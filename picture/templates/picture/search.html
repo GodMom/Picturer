@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}
 <title>检索结果</title>
-<link rel="stylesheet" type="text/css" href="../../static/css/search.css">
+<link rel="stylesheet" type="text/css" href="static/css/search.css">
 {% endblock %}
 {% block content %}
     <div class="searcher">
@@ -12,7 +12,7 @@
                 {% for i in works %}
                 <li class="work-li">
                     <a href="javascript:void(0)" class="img-look" id="a_img">
-                        <img src="/media/{{i.image_set.all|first}}" title="{{i.description}}" id="work_{{i.ID}}">
+                        <img src="media/{{i.image_set.all|first}}" title="{{i.description}}" id="work_{{i.ID}}">
                     </a>
                     <a href="javascript:void(0)" class="information" id="a_info">
                         <span style="width: 100px" id="works_{{i.ID}}"><b>{{i.title}}</b></span>

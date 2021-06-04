@@ -139,7 +139,7 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = 'picture.Member'
-INTERNAL_IPS = ('172.17.30.245', '127.0.0.1')
+INTERNAL_IPS = ('172.16.0.14', '127.0.0.1')
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators

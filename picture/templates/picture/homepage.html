@@ -6,7 +6,7 @@
         {% for i in works %}
         <li class="work-li">
             <a href="javascript:void(0)" class="img-look" id="a_img{{i.ID}}">
-                <img src="/media/{{i.image_set.all|first}}" id="work_{{i.ID}}" title="{{i.description}}">
+                <img src="media/{{i.image_set.all|first}}" id="work_{{i.ID}}" title="{{i.description}}">
             </a>
             <a href="javascript:void(0)" class="information" id="a_info{{i.ID}}">
                 <span style="width: 100px" id="works_{{i.ID}}"><b>{{i.title}}</b></span>

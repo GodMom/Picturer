@@ -11,6 +11,5 @@ import os, sys
 
 from django.core.wsgi import get_wsgi_application
 
-sys.path.append('C://Users/26942/Apache24')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Picturer.settings")
 application = get_wsgi_application()
